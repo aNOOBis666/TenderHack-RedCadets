@@ -1,1 +1,1 @@
-# TenderHack-RedCadets
+# TenderHack-RedCadetes
