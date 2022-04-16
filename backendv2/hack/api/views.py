@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.viewsets import GenericViewSet
 
-# Create your views here.
+from .models import User
+from .serializers import DealsSerializer
+
+
+class HomeViewSet(GenericViewSet):
+    serializer_class = DealsSerializer
+    queryset = User.objects.all()
