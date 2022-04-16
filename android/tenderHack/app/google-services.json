@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119184098823",
+    "project_id": "tenderhack-44884",
+    "storage_bucket": "tenderhack-44884.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119184098823:android:2d970f3c0f631936958ca2",
+        "android_client_info": {
+          "package_name": "com.redcadeted.tenderhack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119184098823-2dfdigkl2ca56n44p7anm5pjqaulje74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf5YR6z7pQQTVnVDMjqkRDYv6xPQZIUIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119184098823-2dfdigkl2ca56n44p7anm5pjqaulje74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/dealListFragment">
+
+    <fragment
+        android:id="@+id/dealListFragment"
+        android:name="com.redcadeted.tenderhack.ui.dealsListFragment.DealsListFragment"
+        tools:layout="@layout/fragment_deals_list"
+        />
+
+    <fragment
+        android:id="@+id/dealFragment"
+        android:name="com.redcadeted.tenderhack.ui.dealFragment.DealFragment"
+        tools:layout="@layout/fragment_deals"
+        />
+
+</navigation>
