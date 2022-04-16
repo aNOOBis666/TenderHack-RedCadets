@@ -4,59 +4,40 @@ from sqlalchemy.orm import relationship
 from .database import Base
 
 
-class Events(Base):
-    __tablename__ = "events"
+class User(Base):
+    __tablename__ = "user"
 
-    id_event = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
-    description = Column(String)
-    coords = Column(String)
-    date = Column(DateTime)
-    is_active = Column(Boolean, default=True)
-    event_id = Column(Integer, ForeignKey("profile.id_profile"))
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)
+    surname = Column(String)
+    name = Column(String)
+    date_creation = Column(DateTime)
+    nalog_name = Column(Integer, ForeignKey(""))
+    password = Column(String)
+    role = Column(String)
 
-    items = relationship("Categories", back_populates="owner")
-    profile = relationship("Profile", back_populates="event")
+    #items = relationship("Categories", back_populates="owner")
+    #profile = relationship("Profile", back_populates="event")
 
 
-class Categories(Base):
-    __tablename__ = "categories"
+class Deal(Base):
+    __tablename__ = "deal"
 
-    id_categories = Column(Integer, primary_key=True, index=True)
-    text = Column(String, index=True)
-    owner_id = Column(Integer, ForeignKey("events.id_event"))
+    id_deal = Column(Integer, primary_key=True, index=True)
+    name_deal = Column(String)
+    description_deal = Column(String)
+    date_deal = Column(DateTime)
+    owner_id = Column(Integer)
+    first_place_id = Column(Integer)
+    second_place_id = Column(Integer)
+    status_deal = Column(String)
+    start_price = Column(Integer)
 
     owner = relationship("Events", back_populates="items")
 
 
-class Profile(Base):
-    __tablename__ = "profile"
+class Lastbet(Base):
+    __tablename__ = "lastbet"
 
-    id_profile = Column(Integer, primary_key=True, index=True)
-    username = Column(String)
-    name = Column(String)
-    password = Column(String)
-    photo = Column(String)
-    description = Column(String)
-    rating_deals = Column(Integer)
-    rating_events = Column(Integer)
-
-    event = relationship("Events", back_populates="profile")
-    inspections = relationship("Inspections", back_populates="profile")
-    # messages_list = relationship("MessagesList", back_populates="profile")
-
-
-# Pattern for next versions
-
-
-class Inspections(Base):
-    __tablename__ = "inspections"
-
-    id_inspections = Column(Integer, primary_key=True, index=True)
-
-    profile_banned = Column(Boolean, default=False)
-    event_banned = Column(Boolean, default=False)
-    profile_id = Column(Integer, ForeignKey("profile.id_profile"))
-
-    profile = relationship("Profile", back_populates="inspections")
-
+    last_bet_id = Column(Integer, ForeignKey("deal.id_deal"))
+    
