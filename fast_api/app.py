@@ -49,11 +49,8 @@ def read_deal_by_id(deal_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/deal/", response_model=schemas.Deals)
-def post_deal(id_deal: int, name_deal: str, description_deal: str, date_deal: str, owner_id: int, first_place_id: int,
-              second_place_id: int, status_deal: str, start_price: int,
-              category: schemas.DealCreate, db: Session = Depends(get_db)):
-    deal_created = crud.create_deal(category, db, id_deal, name_deal, description_deal, date_deal, owner_id,
-                                    first_place_id, second_place_id, status_deal, start_price)
+def post_deal(category: schemas.DealCreate, db: Session = Depends(get_db)):
+    deal_created = crud.create_deal(category, db)
     return deal_created
 
 
@@ -70,10 +67,8 @@ def read_user_by_id(user_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/user/", response_model=schemas.Users)
-def post_user(id: int, email: str, surname: str, name: str, date_creation: str, nalog_name: int, password: str,
-              role: str, category: schemas.UserCreate, db: Session = Depends(get_db)):
-    user_created = crud.create_user(category, db, id=id, email=email, surname=surname, name=name,
-                                    date_creation=date_creation, nalog_name=nalog_name, password=password, role=role)
+def post_user(category: schemas.UserCreate, db: Session = Depends(get_db)):
+    user_created = crud.create_user(category, db)
     return user_created
 
 
@@ -96,8 +91,6 @@ def read_notifications_by_user_id(user_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/notifications/", response_model=schemas.Notifications)
-def post_user(owner_id: int, id_notification: int, user_preference: str, notification_type: str,
-              category: schemas.NotificationsCreate, db: Session = Depends(get_db)):
-    notif_created = crud.create_notification(category, db, owner_id=owner_id, id_notification=id_notification,
-                                             user_preference=user_preference, notification_type=notification_type)
+def post_user(category: schemas.NotificationsCreate, db: Session = Depends(get_db)):
+    notif_created = crud.create_notification(category, db)
     return notif_created

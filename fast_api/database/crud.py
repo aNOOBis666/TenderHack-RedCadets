@@ -30,10 +30,8 @@ def get_user_by_id(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
-def create_user(category: schemas.UserCreate, db: Session, id: int, email: str, surname: str, name: str,
-                date_creation: str, nalog_name: int, password: str, role: str):
-    db_user = models.User(**category.dict(), id=id, email=email, surname=surname, name=name,
-                          date_creation=date_creation, nalog_name=nalog_name, password=password, role=role)
+def create_user(category: schemas.UserCreate, db: Session):
+    db_user = models.User(**category.dict())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
