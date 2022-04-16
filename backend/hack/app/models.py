@@ -1,50 +1,52 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.contrib.auth.models import PermissionsMixin
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.utils.translation import ugettext_lazy as _
-
-from .managers import UserManager
+from django.contrib.auth.models import UserManager, AbstractUser
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
-    is_active = models.BooleanField(_('active'), default=True)
+class User(AbstractUser):
+    username = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(unique=False)
+    name = models.CharField(max_length=30, blank=True)
+    surname = models.CharField(max_length=30, blank=True)
+    date_creation = models.DateTimeField(auto_now_add=True)
+    password = models.CharField(max_length=30, blank=False)
+    role = models.CharField(max_length=100, blank=True)
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
-    class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
-
-    def get_full_name(self):
-        '''
-        Returns the first_name plus the last_name, with a space in between.
-        '''
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
-
-    def get_short_name(self):
-        '''
-        Returns the short name for the user.
-        '''
-        return self.first_name
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        '''
-        Sends an email to this User.
-        '''
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+    is_anonymous = False
+    is_authenticated = False
 
 
-class Bot(models.Model):
-    price = models.CharField()
-    id_bet = models.IntegerField(null=False) #номер ставки 
-    date_bet = models.DateTimeField(null=True) #дата ставки 
+#   Owner, admin, player
+
+
+class Deal(models.Model):
+    id_deal = models.IntegerField(null=False)
+    name_deal = models.CharField(max_length=100, null=False)
+    description_deal = models.CharField(max_length=1000, null=True)
+    date_deal = models.DateTimeField(auto_now_add=True)
+    owner_id = models.IntegerField(null=False)
+    first_id = models.IntegerField(null=True)
+    second_id = models.IntegerField(null=True)
+
+    def __str__(self):
+        return str(self.name_deal)
+
+
+class Notification(models.Model):
+    user_preference = models.CharField(max_length=10)  # Email/Telegram
+    notification_type = models.IntegerField()
+    owner_id = models.IntegerField(null=False)
+
+    def __str__(self):
+        return str(self.owner_id)
+
+    # 0. 5 минут до конца сессии
+    # 1. окончание сессии
+    # 2. подписание оферты
+    # 3. подписание контракта
