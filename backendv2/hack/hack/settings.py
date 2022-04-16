@@ -42,6 +42,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'api',
+    'rest_framework.authtoken',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'jwt',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [

@@ -1,9 +1,10 @@
+from pyexpat import model
 from django.db import models
 
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30, unique=True)
+    nalog_name = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=False)
     name = models.CharField(max_length=30, blank=True)
     surname = models.CharField(max_length=30, blank=True)
@@ -22,10 +23,17 @@ class Deal(models.Model):
     owner_id = models.IntegerField(null=False)
     first_id = models.IntegerField(null=True, blank=True)
     second_id = models.IntegerField(null=True, blank=True)
+    status_deal = models.CharField(null=True, blank=True)
+    start_price = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name_deal
 
+
+class Lastbet(models.Model):
+    last_bet_id = models.ForeignKey(Deal, null=True)
+    last_date_time = models.DateTimeField(null=True)
+    last_user_bet = models.IntegerField(null=True)
 
 class Notification(models.Model):
     user_preference = models.CharField(max_length=10)  # Email/Telegram
