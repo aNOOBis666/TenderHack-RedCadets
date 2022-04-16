@@ -1,6 +1,4 @@
-from typing import List
 from pydantic import BaseModel
-import datetime
 
 
 class UserBase(BaseModel):
