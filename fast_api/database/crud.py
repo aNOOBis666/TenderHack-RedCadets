@@ -10,12 +10,8 @@ def get_deal_by_id(db: Session, deal_id: int):
     return db.query(models.Deal).filter(models.Deal.id_deal == deal_id).first()
 
 
-def create_deal(category: schemas.DealCreate, db: Session, id_deal: int, name_deal: str, description_deal: str,
-                date_deal: str, owner_id: int, first_place_id: int, second_place_id: int, status_deal: str,
-                start_price: int):
-    db_user = models.Deal(**category.dict(), id_deal=id_deal, name_deal=name_deal, description_deal=description_deal,
-                          date_deal=date_deal, owner_id=owner_id, first_place_id=first_place_id,
-                          second_place_id=second_place_id, status_deal=status_deal, start_price=start_price)
+def create_deal(category: schemas.DealCreate, db: Session):
+    db_user = models.Deal(**category.dict())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
