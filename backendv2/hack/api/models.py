@@ -21,8 +21,8 @@ class Deal(models.Model):
     description_deal = models.CharField(max_length=1000, null=True, blank=True)
     date_deal = models.DateTimeField(auto_now_add=True)
     owner_id = models.IntegerField(null=False)
-    first_id = models.IntegerField(null=True, blank=True)
-    second_id = models.IntegerField(null=True, blank=True)
+    first_place_id = models.IntegerField(null=True, blank=True)
+    second_place_id = models.IntegerField(null=True, blank=True)
     status_deal = models.CharField(null=True, blank=True)
     start_price = models.IntegerField(null=True, blank=True)
 
