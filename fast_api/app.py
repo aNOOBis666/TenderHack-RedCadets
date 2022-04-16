@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI
 from sqlalchemy.orm import Session
 
 from database import crud, models, schemas
@@ -33,8 +33,8 @@ def read_deal_by_id(deal_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/deal/", response_model=schemas.Deals)
-def post_deal(user_id: int, category: schemas.DealCreate, db: Session = Depends(get_db)):
-    deal_created = crud.create_deal(category, db, user_id=user_id)
+def post_deal(deal_id: int, category: schemas.DealCreate, db: Session = Depends(get_db)):
+    deal_created = crud.create_deal(category, db, deal_id)
     return deal_created
 
 
@@ -62,23 +62,19 @@ def read_last_bet_by_id(deal_id: int, db: Session = Depends(get_db)):
     return deal
 
 
-@app.post("/last_bet/", response_model=schemas.LastBets)
-def update_last_bet(deal_id: int, category: schemas.LastBetsCreate, db: Session = Depends(get_db)):
-    deal_created = crud.update_last_bet(category, db, user_id=deal_id)
-    return deal_created
+# @app.post("/last_bet/", response_model=schemas.LastBets)
+# def update_last_bet(deal_id: int, category: schemas.LastBetsCreate, db: Session = Depends(get_db)):
+#     deal_created = crud.update_last_bet(category, db, deal_id)
+#     return deal_created
 
 
 @app.get("/notifications/", response_model=schemas.Notifications)
-def read_notifications_by_user_id(db: Session = Depends(get_db)):
-    notification = crud.get_notifications_by_user_id(db)
+def read_notifications_by_user_id(user_id: int, db: Session = Depends(get_db)):
+    notification = crud.get_notifications_by_user_id(db, user_id)
     return notification
 
 
 @app.post("/notifications/", response_model=schemas.Notifications)
 def post_user(owner_id: int, category: schemas.NotificationsCreate, db: Session = Depends(get_db)):
-    notif_created = crud.create_notification(category, db, user_id=owner_id)
+    notif_created = crud.create_notification(category, db, owner_id)
     return notif_created
-
-
-if __name__ == '__main__':
-    app.run()

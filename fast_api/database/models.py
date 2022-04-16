@@ -1,5 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 
 from .database import Base
 
@@ -7,23 +6,20 @@ from .database import Base
 class User(Base):
     __tablename__ = "user"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, unique=True)
     email = Column(String)
     surname = Column(String)
     name = Column(String)
     date_creation = Column(DateTime)
-    nalog_name = Column(Integer, ForeignKey(""))
+    nalog_name = Column(Integer)
     password = Column(String)
     role = Column(String)
-
-    #items = relationship("Categories", back_populates="owner")
-    #profile = relationship("Profile", back_populates="event")
 
 
 class Deal(Base):
     __tablename__ = "deal"
 
-    id_deal = Column(Integer, primary_key=True, index=True)
+    id_deal = Column(Integer, primary_key=True, unique=True)
     name_deal = Column(String)
     description_deal = Column(String)
     date_deal = Column(DateTime)
@@ -33,11 +29,20 @@ class Deal(Base):
     status_deal = Column(String)
     start_price = Column(Integer)
 
-    owner = relationship("Events", back_populates="items")
-
 
 class Lastbet(Base):
-    __tablename__ = "lastbet"
+    __tablename__ = "Lastbet"
 
-    last_bet_id = Column(Integer, ForeignKey("deal.id_deal"))
-    
+    id_bet = Column(Integer, primary_key=True, unique=True)
+    last_bet_id = Column(Integer)
+    last_date_time = Column(DateTime)
+    last_user_bet = Column(Integer)
+
+
+class Notifications(Base):
+    __tablename__ = "notifications"
+
+    id_notification = Column(Integer, primary_key=True, unique=True)
+    user_preference = Column(String)
+    notification_type = Column(Integer)
+    owner_id = Column(Integer)
