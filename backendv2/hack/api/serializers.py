@@ -6,4 +6,4 @@ from .models import Deal
 class DealsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deal
-        fields = '__all__'
+        fields = ['id_deal', 'name_deal', 'description_deal', 'date_deal', 'owner_id', 'first_id', 'second_id']

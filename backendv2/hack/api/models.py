@@ -17,14 +17,14 @@ class User(models.Model):
 class Deal(models.Model):
     id_deal = models.IntegerField(null=False)
     name_deal = models.CharField(max_length=100, null=False)
-    description_deal = models.CharField(max_length=1000, null=True)
+    description_deal = models.CharField(max_length=1000, null=True, blank=True)
     date_deal = models.DateTimeField(auto_now_add=True)
     owner_id = models.IntegerField(null=False)
-    first_id = models.IntegerField(null=True)
-    second_id = models.IntegerField(null=True)
+    first_id = models.IntegerField(null=True, blank=True)
+    second_id = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.name_deal)
+        return self.name_deal
 
 
 class Notification(models.Model):
@@ -33,7 +33,7 @@ class Notification(models.Model):
     owner_id = models.IntegerField(null=False)
 
     def __str__(self):
-        return str(self.owner_id)
+        return self.owner_id
 
     # 0. 5 минут до конца сессии
     # 1. окончание сессии
