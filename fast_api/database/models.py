@@ -62,6 +62,7 @@ class Robot(Base):
     send_time = Column(Integer)
     selling_type = Column(Integer)
 
+    last_bet = Column(Float)
     delay = Column(Integer)
 
     is_first = Column(Boolean)

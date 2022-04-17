@@ -87,7 +87,19 @@ class Notifications(NotificationsBase):
 
 
 class RobotBase(BaseModel):
-    pass
+    robot_id: int
+    owner_id: int
+    deal_id: int
+    min_limit: float
+    send_time: int
+    selling_type: int
+    last_bet: float
+    delay: int
+    is_first: bool
+    is_pause: bool
+    is_stop: bool
+    is_smart_duo: bool
+    is_human: bool
 
 
 class RobotCreate(RobotBase):
