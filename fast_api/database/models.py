@@ -14,6 +14,7 @@ class User(Base):
     nalog_name = Column(Integer)
     password = Column(String)
     role = Column(String)
+    tg_username = Column(String)
 
 
 class Deal(Base):
