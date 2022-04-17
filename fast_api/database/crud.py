@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from . import models, schemas
+from roboLogics import dealGame
 
 
 def get_deals(db: Session):
@@ -38,23 +39,30 @@ def get_last_bet_by_id(db: Session, deal_id: int):
     return db.query(models.Lastbet).filter(models.Lastbet.last_bet_id == deal_id).first()
 
 
-# def update_last_bet(category: schemas.LastBetsCreate, db: Session, deal_id: int):
-#     db_user = models.Notifications(**category.dict(), owner_id=owner_id)
-#     db.add(db_user)
-#     db.commit()
-#     db.refresh(db_user)
-#     return db_user
+def update_last_bet(category: schemas.LastBetsCreate, db: Session, user_id: int):
+    db.query(models.Lastbet).filter(models.Lastbet.last_bet_id == user_id).update(**category.dict()).all()
+    db.commit()
 
 
 def get_notifications_by_user_id(db: Session, user_id: int):
     return db.query(models.Notifications).filter(models.Notifications.owner_id == user_id).first()
 
 
-def create_notification(category: schemas.NotificationsCreate, db: Session, owner_id: int, id_notification: int,
-                        user_preference: str, notification_type: str):
-    db_user = models.Notifications(**category.dict(), owner_id=owner_id, id_notification=id_notification,
-                                   user_preference=user_preference, notification_type=notification_type)
+def create_notification(category: schemas.NotificationsCreate, db: Session):
+    db_user = models.Notifications(**category.dict())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
+
+
+def post_bot_info(category: schemas.RobotCreate, db: Session):
+    db_user = models.Robot(**category.dict())
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
+def swap_orders_by_id(category: schemas.RobotSwap, db: Session):
+

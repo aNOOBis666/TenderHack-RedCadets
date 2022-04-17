@@ -80,3 +80,22 @@ class Notifications(NotificationsBase):
 
     class Config:
         orm_mode = True
+
+
+class RobotBase(BaseModel):
+    pass
+
+
+class RobotCreate(RobotBase):
+    pass
+
+
+class RobotSwap(RobotBase):
+    pass
+
+
+class Robot(RobotBase):
+    pass
+
+    class Config:
+        orm_mode = True

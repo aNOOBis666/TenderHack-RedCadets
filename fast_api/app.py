@@ -78,10 +78,9 @@ def read_last_bet_by_id(deal_id: int, db: Session = Depends(get_db)):
     return deal
 
 
-# @app.post("/last_bet/", response_model=schemas.LastBets)
-# def update_last_bet(deal_id: int, category: schemas.LastBetsCreate, db: Session = Depends(get_db)):
-#     deal_created = crud.update_last_bet(category, db, deal_id)
-#     return deal_created
+@app.post("/last_bet/", response_model=schemas.LastBets)
+def update_last_bet(deal_id: int, category: schemas.LastBetsCreate, db: Session = Depends(get_db)):
+    crud.update_last_bet(category, db, deal_id)
 
 
 @app.get("/notifications/", response_model=schemas.Notifications)
@@ -94,3 +93,9 @@ def read_notifications_by_user_id(user_id: int, db: Session = Depends(get_db)):
 def post_user(category: schemas.NotificationsCreate, db: Session = Depends(get_db)):
     notif_created = crud.create_notification(category, db)
     return notif_created
+
+
+# @app.post("/on_start_bot", response_model=schemas.RobotBase)
+# def post_on_start_bot(category: schemas.RobotCreate, db: Session = Depends(get_db)):
+#     bot_started = crud.post_start_bot(category, db)
+#     return

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, Float
 
 from .database import Base
 
@@ -28,6 +28,8 @@ class Deal(Base):
     second_place_id = Column(Integer)
     status_deal = Column(String)
     start_price = Column(Integer)
+    step = Column(Float)
+    finish_time = Column(String)
 
 
 class Lastbet(Base):
@@ -46,3 +48,23 @@ class Notifications(Base):
     user_preference = Column(String)
     notification_type = Column(Integer)
     owner_id = Column(Integer)
+
+
+class Robot(Base):
+    __tablename__ = "Robot"
+
+    robot_id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    owner_id = Column(Integer)
+    deal_id = Column(Integer)
+    min_limit = Column(Float)
+    send_time = Column(Integer)
+    selling_type = Column(Integer)
+
+    delay = Column(Integer)
+
+    is_first = Column(Boolean)
+    is_pause = Column(Boolean)
+    is_stop = Column(Boolean)
+    is_smart_duo = Column(Boolean)
+    is_human = Column(Boolean)
+
