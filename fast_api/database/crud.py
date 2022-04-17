@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from . import models, schemas
-from roboLogics import dealGame
+from .roboLogics.dealGame import bots
 
 
 def get_deals(db: Session):
@@ -42,6 +42,7 @@ def get_last_bet_by_id(db: Session, deal_id: int):
 def update_last_bet(category: schemas.LastBetsCreate, db: Session, user_id: int):
     db.query(models.Lastbet).filter(models.Lastbet.last_bet_id == user_id).update(**category.dict()).all()
     db.commit()
+    bots(db, get_last_bet_by_id(db, user_id))
 
 
 def get_notifications_by_user_id(db: Session, user_id: int):
@@ -65,4 +66,4 @@ def post_bot_info(category: schemas.RobotCreate, db: Session):
 
 
 def swap_orders_by_id(category: schemas.RobotSwap, db: Session):
-
+    pass
