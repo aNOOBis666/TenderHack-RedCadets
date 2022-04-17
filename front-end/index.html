@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автоматизация участия в котировочных сессиях
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="modal modalHide" id="modal">
+        <div class="modal__inner">
+            <div class="modal__close" id="modalClose">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.5 2.5L3 19M19.5 19L3 2.5" stroke="#2F4A7E" stroke-width="3" stroke-linecap="square" />
+                </svg>
+            </div>
+            <div class="modal__wrapper">
+                <h2 class="modal__heading">Вход</h2>
+                <form action="">
+                    <input type="text" placeholder="Введите логин">
+                    <input type="password" placeholder="Введите пароль">
+                    <button>Войти</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal__overlay"></div>
+    </div>
+
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav__wrapper">
+                <a href="#" class="nav__link">
+                    <img src="img/logo.png" alt="logo" class="nav__img">
+                </a>
+                <button class="nav__btn" id="profile">Личный кабинет</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>TorgAssist</h1>
+    </div>
+    <div class="price_step">
+        <div class="price_step__wrapper">
+            <h2>Шаг снижения - 40 руб</h2>
+        </div>
+    </div>
+    <section class="bot">
+        <div class="container">
+            <div class="bot__wrapper">
+                <div class="bot__left">
+                    <form action="">
+                        <select name="id" id="INN" class="bot__outline">
+                            <option value="" disabled selected>ИНН</option>
+                            <option value="firstId">ИНН 1</option>
+                            <option value="secondId">ИНН 2</option>
+                        </select>
+                        <input type="number" class="bot__limit bot__outline" id="limit"
+                            placeholder="Минимальная ставка (₽)" required>
+                        <input type="number" class="bot__limit bot__outline" id="time"
+                            placeholder="Время подачи предложения (мин)" min="1" required>
+                        <div class="bot__radios" id="leftRadios">
+                            <input type="radio" id="Instant" name="typeof">
+                            <label for="Instant">Сейчас</label>
+                            <input type="radio" id="Exact" name="typeof">
+                            <label for="Exact">Точное время</label>
+                            <input type="radio" id="Minutes" name="typeof">
+                            <label for="Minutes">Минут до окончания</label>
+                        </div>
+                        <select name="id" id="Mode" class="bot__outline">
+                            <option value="" disabled selected>Режим торговли</option>
+                            <option value="firstId">Ставка сразу</option>
+                            <option value="secondId">Отложенная ставка</option>
+                            <option value="secondId">SmartTorg</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="divider"></div>
+                <div class="bot__right hide displayNone">
+                    <form action="">
+                        <select name="id" id="INN2" class="bot__outline" disabled>
+                            <option value="" disabled selected>ИНН</option>
+                            <option value="firstId">ИНН 1</option>
+                            <option value="secondId">ИНН 2</option>
+                        </select>
+                        <input type="number" class="bot__limit bot__outline" id="limit2"
+                            placeholder="Минимальная ставка (₽)" disabled>
+                        <input type="number" class="bot__limit bot__outline" id="time2"
+                            placeholder="Время подачи предложения (мин)" disabled min="1">
+                        <div class="bot__radios" id="rightRadios">
+                            <input type="radio" id="Instant2" name="typeof" disabled>
+                            <label for="Instant2">Сейчас</label>
+                            <input type="radio" id="Exact2" name="typeof" disabled>
+                            <label for="Exact2">Точное время</label>
+                            <input type="radio" id="Minutes2" name="typeof" disabled>
+                            <label for="Minutes2">Минут до окончания</label>
+                        </div>
+                        <select name="id" id="Mode2" class="bot__outline" disabled>
+                            <option value="" disabled selected>Режим торговли</option>
+                            <option value="firstId">Ставка сразу</option>
+                            <option value="secondId">Отложенная ставка</option>
+                            <option value="secondId">SmartTorg</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="btns__wrapper">
+                    <div class="play btn" id="play"><img src="icon/play.png" alt=""></div>
+                    <div class="pause btn btnHide" id="pause"><img src="icon/pause.png" alt=""></div>
+                    <div class="stop btn btnHide" id="stop"><img src="icon/stop.png" alt=""></div>
+                </div>
+                <input type="checkbox" name="enable" id="enableSecond">
+                <label for="enableSecond" class="enableSecondClass">Активировать второго бота</label>
+            </div>
+            <div class="timer">До окончания сессии: <span id="hours"> 2</span> часов <span id="minutes">
+                    30</span>
+                минут <span id="seconds"> 14 </span>
+                секунд
+            </div>
+        </div>
+        <input type="checkbox" id="requiredCheck" required>
+        <label class="requiredTitle">Я согласен с <span><a href="#">условиями проведения котировочной
+                    сессии</a></span></label>
+
+
+    </section>
+    <section class="additional">
+
+    </section>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
