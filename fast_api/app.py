@@ -93,9 +93,3 @@ def read_notifications_by_user_id(user_id: int, db: Session = Depends(get_db)):
 def post_user(category: schemas.NotificationsCreate, db: Session = Depends(get_db)):
     notif_created = crud.create_notification(category, db)
     return notif_created
-
-
-# @app.post("/on_start_bot", response_model=schemas.RobotBase)
-# def post_on_start_bot(category: schemas.RobotCreate, db: Session = Depends(get_db)):
-#     bot_started = crud.post_start_bot(category, db)
-#     return

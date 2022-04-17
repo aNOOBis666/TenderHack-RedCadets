@@ -1,5 +1,5 @@
 import telebot
-import config
+from . import config
 
 
 def say(username, messageText):

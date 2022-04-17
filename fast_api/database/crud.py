@@ -14,8 +14,11 @@ def get_deal_by_id(db: Session, deal_id: int):
 def create_deal(category: schemas.DealCreate, db: Session):
     db_user = models.Deal(**category.dict())
     db.add(db_user)
+    db_empty_bet = models.Lastbet()
+    db.add(db_empty_bet)
     db.commit()
     db.refresh(db_user)
+    db.refresh(db_empty_bet)
     return db_user
 
 
@@ -63,7 +66,3 @@ def post_bot_info(category: schemas.RobotCreate, db: Session):
     db.commit()
     db.refresh(db_user)
     return db_user
-
-
-def swap_orders_by_id(category: schemas.RobotSwap, db: Session):
-    pass

@@ -1,20 +1,11 @@
 import time
-from threading import Thread
 from database import models
 from sqlalchemy.orm import Session
-from rules import on_send_time, on_selling_type, is_duo
-from notificationSender import say
-from config import min_limit_confirmed
+from . import rules
+from . import notificationSender
+from . import config
 
-full_selling_time = 40
-last_step = 1
-last_bet_id = 0
-
-robot_1 = 1
-robot_2 = 2
-
-player_1 = 4
-player_2 = 5
+test_emulation = 40
 
 
 def bots(db: Session, dealId: int):
@@ -26,14 +17,15 @@ def bots(db: Session, dealId: int):
         user = db.query(models.User).filter(models.User.id == robot.owner_id).first()
         new_cost = last_bet.cost - deal.step
         if (last_bet.cost > robot.min_limit) and (robot.is_first == True) and (db.query(models.Robot).filter(
-        (models.Robot.owner_id == robot.owner_id) and (models.Robot.is_first == False)).first() > robot.last_bet):
+                (models.Robot.owner_id == robot.owner_id) and (
+                        models.Robot.is_first == False)).first() > robot.last_bet):
             db.query(models.Robot).filter((models.Robot.owner_id == user.id) and (models.Robot.is_first == True)) \
                 .update({'last_user_bet': new_cost})
         elif (last_bet.cost > robot.min_limit) and (robot.is_first == False):
-            db.query(models.Robot).filter((models.Robot.owner_id == user.id) and (models.Robot.is_first == False))\
+            db.query(models.Robot).filter((models.Robot.owner_id == user.id) and (models.Robot.is_first == False)) \
                 .update({'last_user_bet': new_cost})
         else:
-            say(user.tg_username, min_limit_confirmed)
+            notificationSender.say(user.tg_username, config.min_limit_confirmed)
 
 
 def timer():
@@ -43,22 +35,13 @@ def timer():
         time.sleep(1)
 
 
-def game():
-    while True:
-        if full_selling_time != 0:
-            pass
-        else:
-            print(last_bet_id)
-
-
 def set_rules(db: Session, ownerId: int, dealId: int):
-    on_send_time(db, ownerId)
-    on_selling_type(db, ownerId, dealId)
-    if is_duo(db, ownerId):
+    rules.on_send_time(db, ownerId)
+    rules.on_selling_type(db, ownerId, dealId)
+    if rules.is_duo(db, ownerId):
         pass
     else:
         pass
-
 
 
 if __name__ == "__main__":
