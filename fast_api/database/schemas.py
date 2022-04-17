@@ -10,6 +10,7 @@ class UserBase(BaseModel):
     password: str
     nalog_name: int
     date_creation: str
+    tg_username: str
 
 
 class UserCreate(UserBase):
@@ -32,7 +33,9 @@ class DealBase(BaseModel):
     first_place_id: int
     second_place_id: int
     status_deal: str
-    start_price: str
+    start_price: int
+    step: float
+    finish_time: str
 
 
 class DealCreate(DealBase):
@@ -51,6 +54,7 @@ class LastBetBase(BaseModel):
     last_bet_id: int
     last_date_time: str
     last_user_bet: int
+    cost: float
 
 
 class LastBetsCreate(LastBetBase):

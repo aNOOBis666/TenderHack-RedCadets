@@ -39,8 +39,8 @@ class Lastbet(Base):
     id_bet = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     last_bet_id = Column(Integer)
     last_date_time = Column(String)
-    cost = Column(Float)
     last_user_bet = Column(Integer)
+    cost = Column(Float)
 
 
 class Notifications(Base):
