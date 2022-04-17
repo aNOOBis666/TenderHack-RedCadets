@@ -83,7 +83,7 @@
                     </form>
                 </div>
                 <div class="divider"></div>
-                <div class="bot__right hide displayNone">
+                <div class="bot__right hide btnHide">
                     <form action="">
                         <select name="id" id="INN2" class="bot__outline" disabled>
                             <option value="" disabled selected>ИНН</option>
@@ -115,8 +115,8 @@
                     <div class="pause btn btnHide" id="pause"><img src="icon/pause.png" alt=""></div>
                     <div class="stop btn btnHide" id="stop"><img src="icon/stop.png" alt=""></div>
                 </div>
-                <input type="checkbox" name="enable" id="enableSecond">
-                <label for="enableSecond" class="enableSecondClass">Активировать второго бота</label>
+                <input type="checkbox" name="enable" id="enableSecond" class="btnHide">
+                <label for="enableSecond" class="enableSecondClass btnHide">Активировать второго бота</label>
             </div>
             <div class="timer">До окончания сессии: <span id="hours"> 2</span> часов <span id="minutes">
                     30</span>
@@ -131,7 +131,7 @@
 
     </section>
     <section class="additional">
-
+        <button class="showCaseBtn">Test</button>
     </section>
     <script src="js/script.js"></script>
 </body>

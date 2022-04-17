@@ -113,14 +113,12 @@ h1 {
     position: absolute;
     right: 18%;
     top: 98%;
-    display: none;
 }
 
 .bot__wrapper .enableSecondClass {
     position: absolute;
     right: 0%;
     top: 97%;
-    display: none;
 }
 
 .bot__radios {
@@ -345,4 +343,18 @@ select {
 
 .displayNone {
     display: none;
+}
+
+.showCaseBtn {
+    width: 227px;
+    height: 62px;
+    background: #C94C2E;
+    font-weight: 700;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
 }

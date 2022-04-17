@@ -1,4 +1,5 @@
 const checkbox = document.querySelector('#enableSecond'),
+    checkboxLabel = document.querySelector('.enableSecondClass'),
     botRight = document.querySelector('.bot__right'),
     botRightLimit = document.querySelector('#limit2'),
     botRightTime = document.querySelector('#time2'),
@@ -17,10 +18,12 @@ const checkbox = document.querySelector('#enableSecond'),
     modal = document.querySelector('#modal'),
     profile = document.querySelector('#profile'),
     modalClose = document.querySelector('#modalClose'),
+    leftTradeMode = document.querySelector('#Mode'),
     rightTradeMode = document.querySelector('#Mode2'),
     play = document.querySelector('#play'),
     pause = document.querySelector('#pause'),
-    stop = document.querySelector('#stop');
+    stop = document.querySelector('#stop'),
+    showCaseBtn = document.querySelector('.showCaseBtn');
 
 function enableDisableFields() {
     if (checkbox.checked) {
@@ -31,6 +34,11 @@ function enableDisableFields() {
         });
         rightDropdown.disabled = false;
         rightTradeMode.disabled = false;
+        botLeftTime.disabled = true;
+        allLeftRadios.forEach(item => {
+            item.disabled = true;
+        });
+        leftTradeMode.disabled = true;
     } else {
         botRightLimit.disabled = true;
         botRightTime.disabled = true;
@@ -39,8 +47,23 @@ function enableDisableFields() {
         });
         rightDropdown.disabled = true;
         rightTradeMode.disabled = true;
+        botLeftTime.disabled = false;
+        allLeftRadios.forEach(item => {
+            item.disabled = false;
+        })
+        leftTradeMode.disabled = false;
     }
 }
+
+function toggleRightForm() {
+    showCaseBtn.addEventListener('click', () => {
+        checkbox.classList.toggle('btnHide');
+        botRight.classList.toggle('btnHide');
+        checkboxLabel.classList.toggle('btnHide');
+    });
+}
+
+toggleRightForm();
 
 function changeLeftInputType() {
     leftRadioInstant.addEventListener('change', () => {
